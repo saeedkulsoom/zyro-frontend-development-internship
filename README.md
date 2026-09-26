@@ -1,43 +1,37 @@
-# Zyro Frontend Development Internship
+# Manzil — Local Delivery & Logistics Management Platform
 
-This repository contains my submissions for the **Zyroo Frontend Development Internship**.
+Frontend Development Internship — Week 4: Delivery Tracking & Notifications
 
-- **Intern:** Kulsoom Saeed
-- **Portfolio:** [saeedkulsoom.github.io](https://saeedkulsoom.github.io/)
-- **GitHub:** [@saeedkulsoom](https://github.com/saeedkulsoom)
+## Week 3 recap
+- Order creation, order management, rider assignment, and delivery status updates
+- Rider delivery actions and customer order views connecting the Business, Rider, and Customer experiences
 
-## Structure
+## Week 4: what's new
+- **Tracking page** — dedicated view per order showing live delivery progress
+- **Map interface** — simulated route diagram with pickup, rider, and delivery markers (Pickup → Rider → Delivery)
+- **Pickup / delivery locations** — shown clearly on the tracking page (e.g. Pickup: Mardan, Delivery: Timergara)
+- **Rider location** — simulated current position on the route (e.g. Chakdara)
+- **Delivery route** — visual path connecting pickup → rider → delivery
+- **Current status** — status pill (Pending pickup / Picked up / In transit / Delivered) plus a full delivery timeline
+- **Estimated delivery** — simulated ETA shown on every order (e.g. "25 minutes")
+- **Rider information** — name, avatar initials, phone number, vehicle info, current status
+- **Notifications** — bell icon with unread badge in the nav; opens a dropdown listing events (order created, rider assigned, accepted, picked up, delivery started/completed)
+- **Search** — search orders by Order ID, customer name, or rider name
+- **Filters** — filter orders by status and by date
+- **Responsive design** — layout adapts across mobile, tablet, and desktop; map, status, rider info, and notifications stay readable at every size
 
-```
-zyro-frontend-development-internship/
-├── week-01/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│   └── evidence/
-├── README.md
-└── .gitignore
-```
+## Tech
+Single-page HTML/CSS/JavaScript — no build step, no external map API (rider/route positions are simulated per the task spec).
 
-## Week 1 — Onboarding & Environment Setup
+## How to view
+Open `manzil-tracking.html` in any browser, or visit the hosted preview.
 
-**Objective:** Set up the frontend development environment, configure Git and GitHub, and build a basic HTML/CSS/JavaScript test page to verify everything works end-to-end.
+## Files
+- `manzil-tracking.html` — the tracking page (map, rider info, ETA, notifications, search, filters)
+- `README.md` — this file
 
-**What's inside `week-01/`:**
-- `index.html` — a personal introduction page (heading, bio, skills, contact links)
-- `style.css` — styling, applied and responsive across desktop and mobile
-- `script.js` — JavaScript interaction (rotating status line + email button)
-- `evidence/` — screenshots proving environment setup:
-  - Node.js / npm version
-  - Git version
-  - Working webpage in browser
-  - Developer Tools / console with no major errors
-  - Proof of joining the Zyroo WhatsApp Community and Channel
+## Screenshots
+_Add screenshots of the tracking page (desktop + mobile) here before submitting._
 
-**How to run it:**
-1. Clone this repository
-2. Open `week-01/index.html` in a browser (no build step required)
-
-## Tools Used
-
-HTML5, CSS3, JavaScript, Git, GitHub, Node.js, npm, VS Code, Google Chrome DevTools.
+## Next week
+Week 5 task will be assigned or discussed later.
