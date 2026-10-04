@@ -1,14 +1,3 @@
-# OS files
-.DS_Store
-Thumbs.db
-
-# Editor
-.vscode/
-.idea/
-
-# Node
-node_modules/
-npm-debug.log*
-
-# Env
+node_modules
+dist
 .env
