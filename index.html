@@ -1,112 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kulsoom Saeed — AI & Frontend Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zyroo Delivery Platform</title>
+<style>
+:root{--bg:#f6f7fb;--c:#fff;--t:#1b2240;--m:#5d6585;--p:#4f46e5;--b:#dfe3f0;--ok:#15803d;--bad:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1220;--c:#181c30;--t:#eef0fb;--m:#a3a9c9;--p:#8b86ff;--b:#2a3050;--ok:#4ade80;--bad:#f87171}}
+:root[data-theme="dark"]{--bg:#0f1220;--c:#181c30;--t:#eef0fb;--m:#a3a9c9;--p:#8b86ff;--b:#2a3050;--ok:#4ade80;--bad:#f87171}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--t)}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 16px;background:var(--c);border-bottom:1px solid var(--b)}
+header span{margin-left:auto;color:var(--m)}
+.brand{font-weight:700;color:var(--p);text-decoration:none}
+main{max-width:1000px;margin:0 auto;padding:16px}
+.auth{max-width:380px}
+h1,h2,h3{margin:0 0 10px}h2{font-size:18px}h3{font-size:16px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:12px;padding:16px;margin:0 0 16px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:16px}
+.grid .card{margin:0}.grid b{display:block;font-size:26px}
+.f2{display:grid;gap:0 12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+label{display:block;margin:8px 0;font-weight:600;font-size:13px}
+input,select{display:block;width:100%;padding:9px;margin-top:4px;border:1px solid var(--b);border-radius:8px;background:var(--bg);color:var(--t);font:inherit;box-sizing:border-box}
+button,.btn{background:var(--p);color:#fff;border:0;border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;text-decoration:none;display:inline-block}
+button.g{background:transparent;color:var(--p);border:1px solid var(--b)}
+button.x{background:var(--bad)}button:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--p);outline-offset:2px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--b);white-space:nowrap;font-size:14px}
+.b{padding:2px 10px;border-radius:99px;border:1px solid currentColor;font-size:12px;color:var(--p)}
+.Delivered{color:var(--ok)}.Cancelled{color:var(--bad)}
+.tl{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:10px 0}
+.tl li{padding:4px 10px;border-radius:99px;background:var(--bg);border:1px solid var(--b);font-size:12px;color:var(--m)}
+.tl li.d{background:var(--p);color:#fff;border-color:var(--p)}
+.m{color:var(--m)}.err{color:var(--bad);min-height:1em;font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.row>*{flex:1;min-width:140px}
+.acts{display:flex;gap:6px;align-items:center}.acts select{width:auto}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--t);color:var(--bg);padding:10px 16px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90%}
+#toast.on{opacity:1}#toast.e{background:var(--bad);color:#fff}
+</style></head><body>
+<div id="app"></div><div id="toast" role="status" aria-live="polite"></div>
+<script>
+const $=s=>document.querySelector(s),PER=5;
+const ST=['Pending','Assigned','Accepted','Picked Up','In Transit','Delivered'];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const cls=s=>s.replace(' ','');
+const mem={};
+const ls={get(k,d){try{const v=localStorage.getItem(k);if(v!=null)return JSON.parse(v)}catch(e){}return mem[k]??d},set(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const O=()=>ls.get('zo',[]),U=()=>ls.get('zu',[]),N=()=>ls.get('zn',[]);
+if(!U().length){ls.set('zu',[{n:'Bilal Traders',e:'biz@demo.com',p:'1234',r:'business'},{n:'Hamza Rider',e:'rider@demo.com',p:'1234',r:'rider'},{n:'Ayesha Khan',e:'cust@demo.com',p:'1234',r:'customer'}]);
+ls.set('zo',[{id:'ZY-1001',cn:'Ayesha Khan',ph:'03001234567',ce:'cust@demo.com',pu:'Bilal Traders, Saddar',dr:'House 12, Gulshan-e-Iqbal',item:'Groceries',st:'Pending',rider:'',log:[['Pending',Date.now()]]}])}
+let user=null,mode='login',ui={q:'',f:'',page:1},sig='',dt;
+try{const s=JSON.parse(sessionStorage.getItem('zs'));user=U().find(u=>u.e===(s&&s.e))||null}catch(e){}
+const T=t=>new Date(t).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+function toast(m,e){const t=$('#toast');t.textContent=m;t.className='on'+(e?' e':'');clearTimeout(toast.h);toast.h=setTimeout(()=>t.className='',3000)}
+function note(to,m){ls.set('zn',[{to,m,t:Date.now()},...N()].slice(0,100))}
+function upd(id,fn){try{const os=O(),o=os.find(x=>x.id===id);if(!o)return toast('Order not found','e');if(fn(o)!==false)ls.set('zo',os);refresh()}catch(e){toast('Something went wrong. Please try again.','e')}}
+function setSt(o,s){o.st=s;o.log.push([s,Date.now()])}
+const sg=()=>JSON.stringify([O(),N()]);
+function refresh(){sig=sg();location.hash.startsWith('#/order/')?render():paint()}
+function paint(){const l=$('#live');if(l&&user)l.innerHTML=live()}
+function tick(){const s=sg();if(s!==sig){sig=s;location.hash.startsWith('#/order/')?render():paint()}}
+setInterval(tick,3000);addEventListener('storage',tick);addEventListener('hashchange',render);
 
-  <main class="page">
+/* auth */
+function authView(){const L=mode==='login';return `<main class="auth"><h1>🚚 Zyroo Delivery</h1><form class="card" onsubmit="event.preventDefault();${L?'login()':'reg()'}"><h2>${L?'Login':'Create account'}</h2><div id="err" class="err" role="alert"></div>${L?'':'<label>Name<input id="n" autocomplete="name"></label>'}<label>Email<input id="e" type="email" autocomplete="email"></label><label>Password<input id="p" type="password" autocomplete="${L?'current-password':'new-password'}"></label>${L?'':'<label>Role<select id="r"><option value="customer">Customer</option><option value="rider">Rider</option><option value="business">Business</option></select></label>'}<button type="submit">${L?'Login':'Register'}</button> <button type="button" class="g" onclick="mode='${L?'reg':'login'}';render()">${L?'Create account':'Back to login'}</button><p class="m">Demo accounts: biz@demo.com, rider@demo.com, cust@demo.com (password 1234)</p></form></main>`}
+function start(u){user=u;try{sessionStorage.setItem('zs',JSON.stringify({e:u.e}))}catch(e){}$('#app').innerHTML='<main><p class="m" role="status">Loading dashboard…</p></main>';setTimeout(()=>{location.hash='#/'+u.r;sig=sg();render()},400)}
+function login(){const u=U().find(x=>x.e===$('#e').value.trim().toLowerCase()&&x.p===$('#p').value);u?start(u):$('#err').textContent='Invalid email or password.'}
+function reg(){const e=$('#e').value.trim().toLowerCase(),p=$('#p').value,n=$('#n').value.trim();
+if(!n||!/^\S+@\S+\.\S+$/.test(e)||p.length<4)return $('#err').textContent='Enter a name, a valid email and a password of 4+ characters.';
+if(U().some(x=>x.e===e))return $('#err').textContent='This email is already registered.';
+const u={n,e,p,r:$('#r').value};ls.set('zu',[...U(),u]);start(u)}
+function logout(){user=null;try{sessionStorage.removeItem('zs')}catch(e){}location.hash='';render()}
 
-    <section class="hero">
-      <p class="eyebrow">BS Artificial Intelligence · UBIT, University of Karachi</p>
-
-      <div class="hero-row">
-        <div class="avatar">KS</div>
-        <div>
-          <h1>Kulsoom Saeed</h1>
-          <p class="role">Frontend Developer &amp; AI Builder</p>
-        </div>
-      </div>
-
-      <p class="status">
-        <span class="status-dot"></span>
-        <span id="statusText">right now: probably debugging a React component</span>
-      </p>
-    </section>
-
-    <section class="bio">
-      <p>
-        Hi! I'm Kulsoom, and I love turning ideas into real, working products.
-        I split my time between coding and design — building clean React.js
-        interfaces, wiring up backends with Node.js and Flask, and occasionally
-        sneaking in some AI magic, think chatbots, translators, and object
-        detection. When I'm not deep in code, you'll probably find me watching
-        a K-drama or experimenting with Pakistani recipes.
-      </p>
-    </section>
-
-    <section class="skills">
-      <h2>Toolkit</h2>
-
-      <div class="skill-group">
-        <h3>Frontend</h3>
-        <div class="tags">
-          <span class="tag">React.js</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">HTML/CSS</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3>Backend</h3>
-        <div class="tags">
-          <span class="tag">Node.js</span>
-          <span class="tag">Express.js</span>
-          <span class="tag">Flask</span>
-          <span class="tag">Python</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3>AI / ML</h3>
-        <div class="tags">
-          <span class="tag">YOLOv8</span>
-          <span class="tag">Groq / LLaMA API</span>
-          <span class="tag">NLTK</span>
-          <span class="tag">TF-IDF</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3>Dev Tools</h3>
-        <div class="tags">
-          <span class="tag">Git &amp; GitHub</span>
-          <span class="tag">Claude</span>
-          <span class="tag">Cursor</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3>Design</h3>
-        <div class="tags">
-          <span class="tag">Canva</span>
-          <span class="tag">Photopea</span>
-          <span class="tag">Adobe Suite</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="links">
-      <h2>Let's connect</h2>
-      <div class="link-row">
-        <a class="btn btn-primary" href="https://saeedkulsoom.github.io/" target="_blank" rel="noopener">Portfolio</a>
-        <a class="btn btn-outline" href="https://github.com/saeedkulsoom" target="_blank" rel="noopener">GitHub</a>
-        <button class="btn btn-outline" id="emailBtn">Email me</button>
-      </div>
-      <p id="emailOutput" class="email-output" aria-live="polite"></p>
-    </section>
-
-    <footer class="footer">
-      <p>Built during Week 1 of the Zyroo Frontend Development Internship.</p>
-    </footer>
-
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
+/* views */
+const head=()=>`<header><a class="brand" href="#/${user.r}">🚚 Zyroo Delivery</a><span>${esc(user.n)} · ${user.r}</span><button class="g" onclick="logout()">Logout</button></header>`;
+const badge=s=>`<span class="b ${cls(s)}">${s}</span>`;
+const tl=o=>o.st==='Cancelled'?badge('Cancelled'):`<ol class="tl" aria-label="Delivery timeline">${ST.map((s,i)=>`<li class="${i<=ST.indexOf(o.st)?'d':''}">${s}</li>`).join('')}</ol>`;
+const rname=e=>(U().find(u=>u.e===e)||{}).n||'Not assigned';
+function render(){const a=$('#app'),h=location.hash;
+if(!user){a.innerHTML=authView();return}
+if(h==='#/unauthorized'||(['#/business','#/rider','#/customer'].includes(h)&&h!=='#/'+user.r)){a.innerHTML=head()+`<main><div class="card"><h2>403 · Not allowed</h2><p>Your role can't open this page.</p><a class="btn" href="#/${user.r}">Go to my dashboard</a></div></main>`;return}
+if(h.startsWith('#/order/')){a.innerHTML=head()+'<main>'+detail(h.slice(8))+'</main>';return}
+a.innerHTML=head()+'<main>'+shell()+'<div id="live">'+live()+'</div></main>'}
+function shell(){if(user.r!=='business')return `<h1>${user.r==='rider'?'Rider':'Customer'} dashboard</h1>`;
+return `<h1>Business dashboard</h1><form class="card" onsubmit="event.preventDefault();create()"><h2>Quick order</h2><div id="ferr" class="err" role="alert"></div><div class="f2"><label>Customer name<input id="cn"></label><label>Customer phone<input id="ph" type="tel" placeholder="03001234567"></label><label>Customer email<input id="ce" type="email" value="cust@demo.com"></label><label>Pickup address<input id="pu"></label><label>Delivery address<input id="dr"></label><label>Item<input id="it"></label></div><button type="submit">Create order</button></form>
+<div class="card row"><label>Search<input type="search" placeholder="ID, name, address" oninput="srch(this.value)"></label><label>Status<select onchange="ui.f=this.value;ui.page=1;paint()"><option value="">All</option>${[...ST,'Cancelled'].map(s=>`<option>${s}</option>`).join('')}</select></label></div>`}
+function live(){return ({business:bizLive,rider:ridLive,customer:cusLive})[user.r]()+notes()}
+function srch(v){clearTimeout(dt);dt=setTimeout(()=>{ui.q=v;ui.page=1;paint()},250)}
+function pg(d){ui.page+=d;paint()}
+function bizLive(){const os=O(),c=a=>os.filter(o=>a.includes(o.st)).length;
+const S=[['Total',os.length],['Pending',c(['Pending'])],['Active',c(['Assigned','Accepted','Picked Up','In Transit'])],['Completed',c(['Delivered'])],['Cancelled',c(['Cancelled'])]];
+const l=os.filter(o=>(!ui.f||o.st===ui.f)&&(!ui.q||(o.id+o.cn+o.pu+o.dr).toLowerCase().includes(ui.q.toLowerCase())));
+const pgs=Math.max(1,Math.ceil(l.length/PER));ui.page=Math.min(ui.page,pgs);
+const rows=l.slice((ui.page-1)*PER,ui.page*PER),R=U().filter(u=>u.r==='rider');
+return `<div class="grid">${S.map(s=>`<div class="card"><span class="m">${s[0]}</span><b>${s[1]}</b></div>`).join('')}</div>
+<div class="card"><h2>Orders</h2>${rows.length?`<div class="tw"><table><thead><tr><th>ID</th><th>Customer</th><th>Route</th><th>Status</th><th>Rider</th><th>Actions</th></tr></thead><tbody>${rows.map(o=>`<tr><td>${o.id}</td><td>${esc(o.cn)}</td><td>${esc(o.pu)} → ${esc(o.dr)}</td><td>${badge(o.st)}</td><td>${esc(rname(o.rider))}</td><td class="acts">${o.st==='Pending'?`<select aria-label="Assign rider for ${o.id}" onchange="assign('${o.id}',this.value)"><option value="">Assign rider…</option>${R.map(r=>`<option value="${esc(r.e)}">${esc(r.n)}</option>`).join('')}</select>`:''}${['Pending','Assigned','Accepted'].includes(o.st)?`<button class="x" onclick="cancel('${o.id}')">Cancel</button>`:''}<a class="btn g" href="#/order/${o.id}">View</a></td></tr>`).join('')}</tbody></table></div>`:'<p class="m">No orders match your search.</p>'}
+<div class="row"><button class="g" onclick="pg(-1)" ${ui.page<=1?'disabled':''}>Previous</button><span class="m">Page ${ui.page} of ${pgs}</span><button class="g" onclick="pg(1)" ${ui.page>=pgs?'disabled':''}>Next</button></div></div>`}
+function create(){const v=k=>$('#'+k).value.trim(),d={cn:v('cn'),ph:v('ph'),ce:v('ce').toLowerCase(),pu:v('pu'),dr:v('dr'),item:v('it')},er=[];
+if(!d.cn)er.push('customer name');if(!/^\+?\d[\d\s-]{8,14}$/.test(d.ph))er.push('a valid phone');if(!/^\S+@\S+\.\S+$/.test(d.ce))er.push('a valid email');if(!d.pu)er.push('pickup address');if(!d.dr)er.push('delivery address');if(!d.item)er.push('item');
+if(er.length)return $('#ferr').textContent='Please provide: '+er.join(', ')+'.';
+const os=O(),id='ZY-'+(1001+os.length);os.unshift({id,...d,st:'Pending',rider:'',log:[['Pending',Date.now()]]});ls.set('zo',os);
+note(d.ce,`Order ${id} was created.`);note(user.e,`Order ${id} created.`);toast('Order '+id+' created');render()}
+function assign(id,r){if(!r||user.r!=='business')return;upd(id,o=>{if(o.st!=='Pending')return false;o.rider=r;setSt(o,'Assigned');note(r,`New delivery request ${id}.`);note(o.ce,`Rider ${rname(r)} assigned to ${id}.`);toast('Rider assigned')})}
+function cancel(id){if(user.r!=='business'||!confirm('Cancel order '+id+'?'))return;upd(id,o=>{if(!['Pending','Assigned','Accepted'].includes(o.st))return false;setSt(o,'Cancelled');[o.ce,o.rider].filter(Boolean).forEach(e=>note(e,`Order ${id} was cancelled.`))})}
+function accept(id){upd(id,o=>{if(user.r!=='rider'||o.rider!==user.e||o.st!=='Assigned')return toast('Not allowed','e')&&false;setSt(o,'Accepted');note(o.ce,`Rider accepted ${id}.`);note('biz@demo.com',`Rider accepted ${id}.`)})}
+function next(id){upd(id,o=>{const i=ST.indexOf(o.st);if(user.r!=='rider'||o.rider!==user.e||i<2||i>4)return false;setSt(o,ST[i+1]);note(o.ce,`Order ${id} is now ${o.st}.`);note('biz@demo.com',`Order ${id}: ${o.st}.`)})}
+const nxt={Accepted:'Mark Picked Up','Picked Up':'Mark In Transit','In Transit':'Mark Delivered'};
+function ridLive(){const m=O().filter(o=>o.rider===user.e),g=a=>m.filter(o=>a.includes(o.st));
+const card=(o,b)=>`<div class="card"><h3>${o.id} ${badge(o.st)}</h3><p>${esc(o.cn)} · <a href="tel:${esc(o.ph)}">${esc(o.ph)}</a><br>Pickup: ${esc(o.pu)}<br>Drop: ${esc(o.dr)}</p>${b}</div>`;
+const rq=g(['Assigned']),ac=g(['Accepted','Picked Up','In Transit']),hi=g(['Delivered']);
+return `<h2>Pending requests</h2>${rq.map(o=>card(o,`<button onclick="accept('${o.id}')">Accept delivery</button>`)).join('')||'<p class="m">No pending requests.</p>'}<h2>Active delivery</h2>${ac.map(o=>card(o,`<button onclick="next('${o.id}')">${nxt[o.st]}</button>`)).join('')||'<p class="m">No active delivery.</p>'}<h2>Delivery history</h2>${hi.map(o=>card(o,'')).join('')||'<p class="m">No completed deliveries yet.</p>'}`}
+function cusLive(){const m=O().filter(o=>o.ce===user.e),cur=m.filter(o=>!['Delivered','Cancelled'].includes(o.st)),old=m.filter(o=>['Delivered','Cancelled'].includes(o.st));
+return `<h2>Current orders</h2>${cur.map(o=>`<div class="card"><h3>${o.id} ${badge(o.st)}</h3>${tl(o)}<p>Rider: ${esc(rname(o.rider))}<br>To: ${esc(o.dr)}</p><a class="btn g" href="#/order/${o.id}">Order details</a></div>`).join('')||'<p class="m">No active orders.</p>'}<h2>Previous orders</h2>${old.map(o=>`<div class="card"><h3>${o.id} ${badge(o.st)}</h3><p>${esc(o.item)} → ${esc(o.dr)}</p></div>`).join('')||'<p class="m">No previous orders.</p>'}`}
+function notes(){const n=N().filter(x=>x.to===user.e).slice(0,8);return `<div class="card"><h2>Notifications (${n.length})</h2>${n.map(x=>`<p>${esc(x.m)} <span class="m">${T(x.t)}</span></p>`).join('')||'<p class="m">Nothing new.</p>'}</div>`}
+function detail(id){const o=O().find(x=>x.id===id),back=`<a class="btn g" href="#/${user.r}">← Back</a>`;
+if(!o)return `<div class="card"><h2>Order not found</h2><p>No order with ID ${esc(id)}.</p>${back}</div>`;
+if(!(user.r==='business'||o.rider===user.e||o.ce===user.e))return `<div class="card"><h2>403 · Not allowed</h2><p>This order isn't yours.</p>${back}</div>`;
+return `${back}<div class="card"><h1>${o.id} ${badge(o.st)}</h1>${tl(o)}<p>Customer: ${esc(o.cn)} (${esc(o.ph)})<br>Pickup: ${esc(o.pu)}<br>Delivery: ${esc(o.dr)}<br>Item: ${esc(o.item)}<br>Rider: ${esc(rname(o.rider))}</p><h2>History</h2>${o.log.map(l=>`<p>${l[0]} <span class="m">${T(l[1])}</span></p>`).join('')}</div>`}
+render();
+</script></body></html>
